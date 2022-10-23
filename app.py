@@ -6,7 +6,8 @@ app = Flask(__name__)
 app.debug = True
 
 
-@app.route('/webhook', methods=['POST'])
+#@app.route('/webhook', methods=['POST'])
+@app.route('/')
 def index():
     body = request.json
     
@@ -17,10 +18,12 @@ def index():
 
     city = body['queryResult']['parameters']['geo-city']
     temp = str(int(r['main']['temp']))
-    sunrise = int(r["sys"]["sunrise"])
-    utchour = int(datetime.utcfromtimestamp(sunrise).strftime('%H'))
+    sunrise = str(r["sys"]["sunrise"])
+    ts = int(sunrise)
+    utchour = int(datetime.utcfromtimestamp(ts).strftime('%H'))
     duskhour = utchour-4
-    reply = '{"fulfillmentMessages": [ {"text": {"text": ["The temperature in ' + city +',  is  '+ temp + ' and the sunrise time is ' + duskhour + ' AM."] } } ] }'
+    strduskhour = str(duskhour)
+    reply = '{"fulfillmentMessages": [ {"text": {"text": ["The temperature in ' + city +',  is  '+ temp + ' and the sunrise time is ' + strduskhour + ' AM."] } } ] }'
     return reply
 
 if __name__ == '__main__':
