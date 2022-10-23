@@ -6,8 +6,7 @@ app = Flask(__name__)
 app.debug = True
 
 
-#@app.route('/webhook', methods=['POST'])
-@app.route('/')
+@app.route('/webhook', methods=['POST'])
 def index():
     body = request.json
     
