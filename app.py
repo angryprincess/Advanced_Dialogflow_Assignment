@@ -17,9 +17,8 @@ def index():
 
     city = body['queryResult']['parameters']['geo-city']
     temp = str(int(r['main']['temp']))
-    sunsrise = str(r["sys"]["sunrise"])
-    ts = int(sunsrise)
-    utchour=int(datetime.utcfromtimestamp(ts).strftime('%H'))
+    sunrise = int(r["sys"]["sunrise"])
+    utchour = int(datetime.utcfromtimestamp(sunrise).strftime('%H'))
     duskhour = utchour-4
     reply = '{"fulfillmentMessages": [ {"text": {"text": ["The temperature in ' + city +',  is  '+ temp + ' and the sunrise time is ' + duskhour + ' AM."] } } ] }'
     return reply
