@@ -5,6 +5,11 @@ import requests
 app = Flask(__name__)
 app.debug = True
 
+@app.route('/')
+def studentNumber():
+    dictionary = {"Student Number": "200499159"}
+    return json.dumps(dictionary)
+
 
 @app.route('/webhook', methods=['POST'])
 def index():
